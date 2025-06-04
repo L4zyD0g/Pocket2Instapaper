@@ -46,7 +46,8 @@ def read_pocket_csv(filename):
 def list_bookmarks(oauth_token, oauth_token_secret):
     url = 'https://www.instapaper.com/api/1/bookmarks/list'
     auth = OAuth1(CONSUMER_KEY, CONSUMER_SECRET, oauth_token, oauth_token_secret)
-    response = requests.post(url, auth=auth)
+    data = {'limit': 500}
+    response = requests.post(url, auth=auth, data=data)
     if response.status_code != 200:
         raise Exception(f"Failed to fetch bookmarks: {response.text}")
     data = response.json()
