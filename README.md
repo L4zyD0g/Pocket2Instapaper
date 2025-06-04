@@ -5,3 +5,5 @@ Steps:
 2. Apply for OAuth consumer token via https://www.instapaper.com/main/request_oauth_consumer_token
 3. Export pocket saved items from https://getpocket.com/export
 4. Fill the variables in main.py, and run
+
+Instapapaer API document: https://www.instapaper.com/api
