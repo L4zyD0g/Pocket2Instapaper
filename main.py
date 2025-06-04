@@ -24,11 +24,9 @@ def get_access_token():
     if response.status_code != 200:
         raise Exception(f"Access token request failed: {response.text}")
 
-    # 解析响应格式：oauth_token=aabbccdd&oauth_token_secret=efgh1234
     token_parts = dict(part.split('=') for part in response.text.strip().split('&'))
     return token_parts['oauth_token'], token_parts['oauth_token_secret']
 
-# {'title': 'title', 'url': 'https://github.com', 'time_added': '1747284948', 'tags': 'tag1|tag2', 'status': 'unread'}
 def read_pocket_csv(filename):
     with open(filename, encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
@@ -64,7 +62,6 @@ def add_bookmark(oauth_token, oauth_token_secret, bookmark):
     url = 'https://www.instapaper.com/api/1/bookmarks/add'
     auth = OAuth1(CONSUMER_KEY, CONSUMER_SECRET, oauth_token, oauth_token_secret)
     response = requests.post(url, auth=auth, data=bookmark)
-    # print(bookmark)
     if response.status_code!= 200:
         raise Exception(f"Failed to add bookmarks: {response.text}")
     print(f"Add bookmark: {bookmark['title']}")
